@@ -1,0 +1,50 @@
+# scraper/models.py
+from django.db import models
+
+class Property(models.Model):
+    name = models.CharField(max_length=255)
+    cost = models.CharField(max_length=255)
+    property_type = models.CharField(max_length=255)
+    area = models.CharField(max_length=255)
+    property_locality = models.CharField(max_length=255)
+    property_city = models.CharField(max_length=255)
+    property_link = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+
+# scraper/scraping_script.py
+from selenium import webdriver
+from bs4 import BeautifulSoup
+
+def scrape_property_data():
+    # Initialize Selenium WebDriver and navigate to 99acres URL
+    # Loop through property listings, extract data, and save it to the database
+
+
+
+# property_scraper_project/settings.py
+
+CRONJOBS = [
+    ('0 0,12 * * *', 'scraper.cron.scrape_property_data'),  # Schedule to run at midnight and noon
+]
+
+
+
+# scraper/management/commands/scrape_properties.py
+from django.core.management.base import BaseCommand
+from scraper.scraping_script import scrape_property_data
+
+class Command(BaseCommand):
+    help = 'Scrape property data and store it in MongoDB'
+
+    def handle(self, *args, **kwargs):
+        scrape_property_data()
+
+
+
+
+#run the server
+     #   python manage.py runserver
+
